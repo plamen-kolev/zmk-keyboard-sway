@@ -48,22 +48,22 @@
         >;
     };
 
-    left_encoder1: left_encoder1 {
+    left_encoder1: left_encoder {
         compatible = "alps,ec11";
-        steps = <80>;
+        steps = <36>;
         status = "disabled";
     };
 
     right_encoder1: right_encoder1 {
         compatible = "alps,ec11";
-        steps = <80>;
+        steps = <36>;
         status = "disabled";
     };
 
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&left_encoder1 &right_encoder1>;
-        triggers-per-rotation = <20>;
+        triggers-per-rotation = <36>;
     };
 };
 
