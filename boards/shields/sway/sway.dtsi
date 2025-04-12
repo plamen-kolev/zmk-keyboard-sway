@@ -50,13 +50,13 @@
 
     left_encoder1: left_encoder {
         compatible = "alps,ec11";
-        steps = <9>;
+        steps = <3>;
         status = "disabled";
     };
 
     right_encoder1: right_encoder1 {
         compatible = "alps,ec11";
-        steps = <9>;
+        steps = <3>;
         status = "disabled";
     };
 
