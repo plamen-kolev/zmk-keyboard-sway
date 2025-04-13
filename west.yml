@@ -1,0 +1,12 @@
+manifest:
+  remotes:
+    - name: petejohanson
+      url-base: https://github.com/petejohanson
+  projects:
+    # Together with the above defined remote, this refers to a module located at
+    # https://github.com/remote-name/repository-name
+    - name: cirque-input-module
+      revision: main
+      remote: petejohanson
+      # This points to a west manifest file in the remote module for further imports
+      import: west.yml

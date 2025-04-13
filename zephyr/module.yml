@@ -1,4 +1,6 @@
 name: zmk-keyboard-sway
 build:
+  depends:
+    - cirque-input-module
   settings:
     board_root: .
