@@ -4,7 +4,7 @@
 if SHIELD_SWAY_LEFT
 
 config ZMK_KEYBOARD_NAME
-    default "SwayV2"
+    default "🍃Sway"
 
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
@@ -27,7 +27,10 @@ if ZMK_DISPLAY
 config SSD1306
     default y
 
-config I2C
+config SPI
+    default y
+
+config ZMK_POINTING
     default y
 
 endif # ZMK_DISPLAY

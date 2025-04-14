@@ -4,28 +4,59 @@
  * SPDX-License-Identifier: MIT
  */
 
+#include <dt-bindings/zmk/input_transform.h>
 #include "sway.dtsi"
 
 / {
     chosen {
         zmk,kscan = &kscan0;
     };
+
+    glidepoint_listener {
+        compatible = "zmk,input-listener";
+        device = <&glidepoint>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
+    };
+};
+
+&pro_micro_spi {
+    status = "okay";
+    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
+
+    glidepoint: glidepoint@0 {
+        compatible = "cirque,pinnacle";
+        reg = <0>;
+        spi-max-frequency = <1000000>;
+        status = "okay";
+        dr-gpios = <&pro_micro 7 (GPIO_ACTIVE_HIGH)>;
+
+        sensitivity = "4x";
+        sleep;
+        no-taps;
+    };
 };
 
 &kscan0 {
+        // cirque
+        // &pro_micro 10 SS/CS
+        // &pro_micro 14 MISO/SO
+        // &pro_micro 16 MOSI/SI
+        // &pro_micro 7  DR
+
+
         row-gpios
-            = <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
 
         col-gpios
-            = <&pro_micro  10 GPIO_ACTIVE_HIGH>
-            , <&pro_micro  16 GPIO_ACTIVE_HIGH>
+            = <&pro_micro  2 GPIO_ACTIVE_HIGH>
             , <&pro_micro  3 GPIO_ACTIVE_HIGH>
+            , <&pro_micro  4 GPIO_ACTIVE_HIGH>
+            , <&pro_micro  5 GPIO_ACTIVE_HIGH>
             , <&pro_micro  6 GPIO_ACTIVE_HIGH>
-            , <&pro_micro  7 GPIO_ACTIVE_HIGH>
             ;
     };
 
@@ -35,4 +66,8 @@
     b-gpios = <&pro_micro 8 GPIO_PULL_UP>;
 };
 
-
+// Overrides for the input listener node
+&glidepoint_listener {
+    status = "okay";
+    device = <&glidepoint>;
+};
